@@ -57,6 +57,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     name: {
       type: DataTypes.STRING
+    },
+    teacher_id: {
+      type: DataTypes.INTEGER
     }
 
   }, {

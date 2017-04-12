@@ -10,8 +10,8 @@ let replServer = repl.start({prompt: '$_$> '});
 // db.Student.create({first_name: "Ben", last_name: "Roth", birthdate: "1988-03-14"});
 // db.Student.create({first_name: "Brandin", last_name: "Cook", birthdate: "1991-11-20"});
 
-let create = (first_name, last_name, birthdate, email, height, phone) => {
-	db.Student.create({first_name: first_name, last_name: last_name, birthdate: birthdate, email: email, height: height, phone: phone})
+let create = (first_name, last_name, birthdate, email, height, phone, teacher_id) => {
+	db.Student.create({first_name: first_name, last_name: last_name, birthdate: birthdate, email: email, height: height, phone: phone, teacher_id: teacher_id})
 	.then( student => {
 		console.log(`Created student ${student.id} ${student.first_name}`)
 	})
@@ -86,6 +86,43 @@ let createTeacher = (name, email, phone) => {
 	})
 }
 
+let getStudentTeachers = () => {
+
+  db.Student.findAll()
+  .then ( students => {
+    students.forEach(student => {
+      student.getTeacher()
+      .then ( teacher => {
+        console.log(`${student.first_name} ${student.last_name}`)
+
+          console.log(` - `, teacher.name)
+
+
+        })
+      })
+    }
+
+  )
+}
+
+
+let getTeacherStudents = () => {
+  db.Teacher.findAll()
+  .then ( teachers => {
+    teachers.forEach(teacher => {
+      teacher.getStudents()
+      .then ( students => {
+        console.log(`${teacher.name}`)
+        students.forEach( student => {
+          console.log(` -  ${student.first_name} ${student.last_name}`)
+        })
+      })
+    })
+  })
+  
+}
+
+
 // createTeacher("Steve Kerr", "steve@warriors.com", "123456")
 // createTeacher("Mike D'antoni", "mike@rockets.com", "123456")
 // createTeacher("Greg Popovich", "greg@spurs.com", "123456")
@@ -100,7 +137,7 @@ let createTeacher = (name, email, phone) => {
 
 
 replServer.context.createTeacher = createTeacher;
-
+replServer.context.getStudentTeachers = getStudentTeachers;
 
 // test case
 // createTeacher("Brad Jenkins", "brad@celtics.com", "0001115555")
