@@ -63,10 +63,60 @@ let getAllData = () => {
 	})
 }
 
+
+
+
 replServer.context.create = create;
 replServer.context.getFullName = getFullName;
 replServer.context.getAge = getAge;
 replServer.context.getAllData = getAllData;
 
 
+// ===============================================
 
+
+
+let createTeacher = (name, email, phone) => {
+	db.Teacher.create({name: name, email: email, phone: phone})
+	.then( teacher => {
+		console.log(`Created teacher ${teacher.id} ${teacher.name}`)
+	})
+	.catch( err => {
+		console.log(err.message);
+	})
+}
+
+// createTeacher("Steve Kerr", "steve@warriors.com", "123456")
+// createTeacher("Mike D'antoni", "mike@rockets.com", "123456")
+// createTeacher("Greg Popovich", "greg@spurs.com", "123456")
+// createTeacher("Jeff Hornacek", "jeff@knicks.com", "123456")
+// createTeacher("Doc Rivers", "doc@clippers.com", "123456")
+// createTeacher("Luke Walton", "luke@lakers.com", "123456")
+// createTeacher("Billy Donovan", "billy@thunders.com", "123456")
+// createTeacher("Tyron Lue", "tyron@cavs.com", "123456")
+// createTeacher("Brad Stevens", "brad@celtics.com", "123456")
+
+
+
+
+replServer.context.createTeacher = createTeacher;
+
+
+// test case
+// createTeacher("Brad Jenkins", "brad@celtics.com", "0001115555")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
