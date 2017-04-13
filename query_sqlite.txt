@@ -1,8 +1,10 @@
 //
 
-select first_name, last_name, birthdate, email, height, phone from students;
+select id, first_name, last_name, birthdate, email, height, phone from students;
 
-
+select id, first_name, last_name from students;
+select id, name from teachers;
+select id, student_id, teacher_id from studentTeachers;
 
 
 create("James", "Harden", "1988-01-03", "james@rockets.com", 190, "1313131313", 2)

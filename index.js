@@ -86,7 +86,18 @@ let createTeacher = (name, email, phone) => {
 	})
 }
 
-let getStudentTeachers = () => {
+let createStudentTeacher = (student_id, teacher_id) => {
+  db.StudentTeacher.create({student_id: student_id, teacher_id: teacher_id})
+  .then( st => {
+    console.log(`Created Student-id:${st.student_id} and Teacher-id:${st.teacher_id}  association `);
+  })
+  .catch( err => {
+    console.log(err.message);
+  })
+}
+
+// Release 1: student only has one teacher
+let getStudentTeacher = () => {
 
   db.Student.findAll()
   .then ( students => {
@@ -98,6 +109,27 @@ let getStudentTeachers = () => {
           console.log(` - `, teacher.name)
 
 
+        })
+      })
+    }
+
+  )
+}
+
+
+// Release 2: student has many teachers
+let getStudentTeachers = () => {
+
+  db.Student.findAll()
+  .then ( students => {
+    students.forEach(student => {
+      student.getTeachers()
+      .then ( teachers => {
+        console.log(`${student.first_name} ${student.last_name}`)
+          teachers.forEach( teacher => {
+            console.log(` - `, teacher.name)  
+          })
+          
         })
       })
     }
@@ -123,6 +155,10 @@ let getTeacherStudents = () => {
 }
 
 
+
+
+
+
 // createTeacher("Steve Kerr", "steve@warriors.com", "123456")
 // createTeacher("Mike D'antoni", "mike@rockets.com", "123456")
 // createTeacher("Greg Popovich", "greg@spurs.com", "123456")
@@ -135,9 +171,14 @@ let getTeacherStudents = () => {
 
 
 
+// replServer.context.getStudentTeacher = getStudentTeacher;
+
 
 replServer.context.createTeacher = createTeacher;
 replServer.context.getStudentTeachers = getStudentTeachers;
+replServer.context.getTeacherStudents = getTeacherStudents;
+
+replServer.context.createStudentTeacher = createStudentTeacher;
 
 // test case
 // createTeacher("Brad Jenkins", "brad@celtics.com", "0001115555")
