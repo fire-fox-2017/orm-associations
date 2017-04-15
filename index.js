@@ -16,6 +16,45 @@ db.Student.getAllData(function(students){
    });
  });
 
+let assignStudentToTeacher = () => {
+  db.Teacher.findAll().then(function(teachers) {
+          let ids = 0;
+          let promisesOfTeacher = [];
+          for (var i = 0; i < teachers.length; i++) {
+              promisesOfTeacher.push(new Promise(function(resolve, reject) {
+                  ids = teachers[i].id;
+                  if (ids != 0) {
+                      resolve(ids)
+                      //console.log(ids);
+                  } else {
+                      reject('err')
+                  }
+              }))
+          }
+
+          Promise.all(promisesOfTeacher).then(function(ids) {
+            db.Student.findAll().then(function(students){
+
+               let j=0;
+               let k=0;
+               while(j<=students.length){
+                 for (var i = 0; i < ids.length; i++) {
+                   db.StudentTeacher.create({
+                       teacherId: ids[i],
+                       studentId: students[j].id
+                   })
+                   j++
+                 }
+               }
+
+            })
+          }).catch(function(err) {
+              console.log(err);
+          })
+      })
+
+}
+
 
 // let createTeacher = (name, email, phone) => {
 //   db.Teacher.create({name: name, email: email, phone: phone})
@@ -56,6 +95,7 @@ let addStudent = () => {
  }
 
 replServer.context.addStudent = addStudent;
+replServer.context.assign = assignStudentToTeacher;
 
 
 // addStudent();
