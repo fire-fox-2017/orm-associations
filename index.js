@@ -1,6 +1,8 @@
 "use strict"
 
-let db = require('./models');
+const db = require('./models');
+const repl = require('repl');
+const replServer = repl.start({prompt: '> '})
 
 db.Student.getAllData(function(students){
    console.log("===============get All Data=================");
@@ -15,15 +17,16 @@ db.Student.getAllData(function(students){
  });
 
 
-let createTeacher = (name, email, phone) => {
-  db.Teacher.create({name: name, email: email, phone: phone})
-  .then(teacher => {
-    console.log(`Created teacher ${teacher.id} ${teacher.name}`)
-  })
-  .catch(err => {
-    console.log(err.message);
-  });
-}
+// let createTeacher = (name, email, phone) => {
+//   db.Teacher.create({name: name, email: email, phone: phone})
+//   .then(teacher => {
+//     console.log(`Created teacher ${teacher.id} ${teacher.name}`)
+//   })
+//   .catch(err => {
+//     console.log(err.message);
+//   });
+// }
+
 
 let data = {
    firstname : "Testing",
@@ -51,6 +54,9 @@ let addStudent = () => {
    });
      
  }
+
+replServer.context.addStudent = addStudent;
+
 
 // addStudent();
 

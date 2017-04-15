@@ -42,7 +42,51 @@ module.exports = {
       height: 165,
       phone: '1234567899',
       email: 'bro@gmail.com',
-      birthdate: new Date('1965-11-21'),
+      birthdate: new Date('1965-11-08'),
+      // birthdate: new Date('1965-11-21').toISOString().substring(0, 10),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      first_name: 'John',
+      last_name: 'Join',
+      height: 189,
+      phone: '1234567899',
+      email: 'join@gmail.com',
+      birthdate: new Date('1912-10-04'),
+      // birthdate: new Date('1965-11-21').toISOString().substring(0, 10),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      first_name: 'John',
+      last_name: 'Lem',
+      height: 178,
+      phone: '1234567899',
+      email: 'lem@gmail.com',
+      birthdate: new Date('1978-09-13'),
+      // birthdate: new Date('1965-11-21').toISOString().substring(0, 10),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      first_name: 'John',
+      last_name: 'Rambutan',
+      height: 175,
+      phone: '1234567899',
+      email: 'rambutan@gmail.com',
+      birthdate: new Date('1989-04-12'),
+      // birthdate: new Date('1965-11-21').toISOString().substring(0, 10),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      first_name: 'John',
+      last_name: 'Keriting',
+      height: 188,
+      phone: '1234567899',
+      email: 'keriting@gmail.com',
+      birthdate: new Date('1977-11-17'),
       // birthdate: new Date('1965-11-21').toISOString().substring(0, 10),
       createdAt: new Date(),
       updatedAt: new Date()
