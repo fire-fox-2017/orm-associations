@@ -14,6 +14,17 @@ db.Student.getAllData(function(students){
    });
  });
 
+
+let createTeacher = (name, email, phone) => {
+  db.Teacher.create({name: name, email: email, phone: phone})
+  .then(teacher => {
+    console.log(`Created teacher ${teacher.id} ${teacher.name}`)
+  })
+  .catch(err => {
+    console.log(err.message);
+  });
+}
+
 let data = {
    firstname : "Testing",
    lastname : "Rahasia",
@@ -23,7 +34,7 @@ let data = {
    height : "150"
  }
 
-let insert = () => {
+let addStudent = () => {
    db.Student.create({
     first_name: data.firstname,
     last_name: data.lastname,
@@ -41,5 +52,5 @@ let insert = () => {
      
  }
 
-// insert();
+// addStudent();
 
