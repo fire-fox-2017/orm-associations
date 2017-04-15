@@ -6,6 +6,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "faker": "^4.1.0",
     "moment": "^2.18.1",
     "sequelize": "^3.30.4",
     "sequelize-cli": "^2.7.0",

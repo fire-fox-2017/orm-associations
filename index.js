@@ -16,44 +16,44 @@ db.Student.getAllData(function(students){
    });
  });
 
-let assignStudentToTeacher = () => {
-  db.Teacher.findAll().then(function(teachers) {
-          let ids = 0;
-          let promisesOfTeacher = [];
-          for (var i = 0; i < teachers.length; i++) {
-              promisesOfTeacher.push(new Promise(function(resolve, reject) {
-                  ids = teachers[i].id;
-                  if (ids != 0) {
-                      resolve(ids)
-                      //console.log(ids);
-                  } else {
-                      reject('err')
-                  }
-              }))
-          }
+// let assignStudentToTeacher = () => {
+//   db.Teacher.findAll().then(function(teachers) {
+//           let ids = 0;
+//           let promisesOfTeacher = [];
+//           for (var i = 0; i < teachers.length; i++) {
+//               promisesOfTeacher.push(new Promise(function(resolve, reject) {
+//                   ids = teachers[i].id;
+//                   if (ids != 0) {
+//                       resolve(ids)
+//                       //console.log(ids);
+//                   } else {
+//                       reject('err')
+//                   }
+//               }))
+//           }
 
-          Promise.all(promisesOfTeacher).then(function(ids) {
-            db.Student.findAll().then(function(students){
+//           Promise.all(promisesOfTeacher).then(function(ids) {
+//             db.Student.findAll().then(function(students){
 
-               let j=0;
-               let k=0;
-               while(j<=students.length){
-                 for (var i = 0; i < ids.length; i++) {
-                   db.StudentTeacher.create({
-                       teacherId: ids[i],
-                       studentId: students[j].id
-                   })
-                   j++
-                 }
-               }
+//                let j=0;
+//                let k=0;
+//                while(j<=students.length){
+//                  for (var i = 0; i < ids.length; i++) {
+//                    db.StudentTeacher.create({
+//                        teacherId: ids[i],
+//                        studentId: students[j].id
+//                    })
+//                    j++
+//                  }
+//                }
 
-            })
-          }).catch(function(err) {
-              console.log(err);
-          })
-      })
+//             })
+//           }).catch(function(err) {
+//               console.log(err);
+//           })
+//       })
 
-}
+// }
 
 
 // let createTeacher = (name, email, phone) => {
@@ -94,8 +94,48 @@ let addStudent = () => {
      
  }
 
+let whoIsMyTeacher = (id) => {
+  db.Student.find({
+    where:{
+      id:id
+    }
+  })
+  .then(function(student){
+     // console.log(student);
+     console.log(`${student.getFullName()} has teachers: `);
+     student.getTeachers().then(function(teachers){
+       teachers.forEach(function(teacher){
+         console.log(`name :${teacher.name} | email : ${teacher.email}`);
+       })
+     })
+})
+}
+
+let whoIsMyStudent = (id) => {
+  db.Teacher.find({
+    where:{
+      id:id
+    }
+  })
+  .then(function(teacher){
+     console.log(`${teacher.name} has students: `);
+     // console.log(teacher);
+     teacher.getStudents().then(function(students){
+       students.forEach(function(student){
+         console.log(`name :${student.getFullName()} | email : ${student.email}`);
+       })
+     })
+})
+}
+
+// whoIsMyTeacher(10);
+whoIsMyStudent(11);
+
 replServer.context.addStudent = addStudent;
-replServer.context.assign = assignStudentToTeacher;
+replServer.context.whoMyTeacher = whoIsMyTeacher;
+replServer.context.whoMyStudent = whoIsMyStudent;
+// replServer.context.assign = assignStudentToTeacher;
+
 
 
 // addStudent();
