@@ -1,0 +1,26 @@
+//
+
+select id, first_name, last_name, birthdate, email, height, phone from students;
+
+select id, first_name, last_name from students;
+select id, name from teachers;
+select id, student_id, teacher_id from studentTeachers;
+
+
+create("James", "Harden", "1988-01-03", "james@rockets.com", 190, "1313131313", 2)
+create("Steph", "Curry", "1987-03-14", "steph@warriors.com", 180, "3030303030", 1)
+create("Kawhi", "Leonard", "1988-01-03", "kawhi@spurs.com", 185, "2222222222", 3)
+create("David", "Johnson", "1990-10-10", "dj@cards.com", 180, "3131313131", 10)
+create("Kevin", "Durant", "1985-05-22", "kd@warriors.com", 193, "3434343434", 1)
+
+
+createTeacher("Mike D'antoni", "mike@rockets.com", "123456")
+createTeacher("Greg Popovich", "greg@spurs.com", "123456")
+createTeacher("Jeff Hornacek", "jeff@knicks.com", "123456")
+createTeacher("Doc Rivers", "doc@clippers.com", "123456")
+createTeacher("Luke Walton", "luke@lakers.com", "123456")
+createTeacher("Billy Donovan", "billy@thunders.com", "123456")
+createTeacher("Tyron Lue", "tyron@cavs.com", "123456")
+createTeacher("Brad Stevens", "brad@celtics.com", "123456")
+createTeacher("Bruce Arians", "bruce@cards.com", "31313131")
+
