@@ -31,5 +31,4 @@ db.Student.findAll()
   })
 }
 
-
 replServer.context.find = findAll

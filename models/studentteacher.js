@@ -13,4 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
   return StudentTeacher;
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 4450d009c9e41d607fe74bedb10fa5a32dd35b8a
