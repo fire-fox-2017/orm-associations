@@ -17,10 +17,16 @@ let insertStudent = (firstname, lastname, birthdate, email, height, phone) => {
 let all = () => {
   db.Student.getAllData(function(rows){
     rows.forEach(student => {
-      console.log(student.id)
-      console.log(student.firstname)
-      console.log(student.lastname)
-      console.log(student.getFullName())
+      student.getTeachers().then(function(teachers){
+        console.log(student.id)
+        console.log(student.firstname)
+        console.log(student.lastname)
+        console.log(student.getFullName())
+        teachers.forEach((teacher)=>{
+          console.log('--' + teacher.name)
+        })
+      })
+      
     })
   })
 } 
